@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mocha Gallery Studio</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero__content">
+      <p class="eyebrow">Creative Portfolio</p>
+      <div class="hero__headline">
+        <div>
+          <h1 id="gallery-title">Mocha Gallery Studio</h1>
+          <p id="gallery-subtitle">실사용 가능한 반응형 포트폴리오 갤러리</p>
+          <div class="hero__meta">
+            <span id="total-count" class="meta-pill">총 0개 작품</span>
+            <span id="result-count" class="meta-pill">검색 결과 0개</span>
+            <span class="meta-pill">최신 업로드 지원</span>
+          </div>
+        </div>
+        <div class="hero__top-actions">
+          <button id="theme-toggle" class="btn" type="button">🌙 다크</button>
+          <button id="upload-open" class="btn btn--primary" type="button">+ 업로드</button>
+          <button id="delete-all-btn" class="btn btn--danger" type="button" hidden>전체 삭제</button>
+        </div>
+      </div>
+
+      <div class="hero__actions">
+        <div class="search-wrap">
+          <input id="search-input" type="search" placeholder="작품 이름/설명 검색" aria-label="검색" />
+          <button id="search-clear" class="clear-btn" type="button" aria-label="검색어 초기화">✕</button>
+        </div>
+        <input id="admin-token" class="admin-token" type="password" placeholder="관리자 토큰">
+        <button id="admin-login-btn" class="btn" type="button">관리자 로그인</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="toolbar-row">
+      <section class="toolbar" aria-label="카테고리 필터"></section>
+      <select id="sort-select" class="sort-select" aria-label="정렬">
+        <option value="latest">최신순</option>
+        <option value="name">이름순</option>
+      </select>
+    </section>
+
+    <section id="gallery-grid" class="gallery-grid" aria-live="polite"></section>
+    <button id="load-more" class="btn load-more" type="button" hidden>더 보기</button>
+  </main>
+
+  <div id="image-modal" class="modal" hidden>
+    <div class="modal__backdrop" data-close="true"></div>
+    <div class="modal__dialog" role="dialog" aria-modal="true" aria-label="이미지 상세 보기">
+      <button class="modal__close" type="button" data-close="true">✕</button>
+      <button class="modal__nav modal__nav--prev" type="button" id="modal-prev">‹</button>
+      <img id="modal-image" alt="">
+      <button class="modal__nav modal__nav--next" type="button" id="modal-next">›</button>
+      <div class="modal__meta">
+        <span id="modal-category" class="badge"></span>
+        <h2 id="modal-title"></h2>
+        <p id="modal-description"></p>
+      </div>
+    </div>
+  </div>
+
+  <div id="upload-modal" class="modal" hidden>
+    <div class="modal__backdrop" data-close-upload="true"></div>
+    <div class="upload-dialog" role="dialog" aria-modal="true" aria-label="이미지 업로드">
+      <button class="modal__close" type="button" data-close-upload="true">✕</button>
+      <h2>새 작품 업로드</h2>
+      <form id="upload-form">
+        <label class="dropzone" id="dropzone">
+          <input type="file" id="file-input" name="image" accept="image/png,image/jpeg,image/webp" required>
+          <div>
+            <strong>드래그 & 드롭</strong> 또는 클릭해 이미지 선택
+            <p>PNG/JPG/WEBP, 최대 8MB</p>
+          </div>
+          <img id="preview-image" alt="미리보기" hidden>
+        </label>
+        <input name="nickname" id="upload-nickname" placeholder="익명 닉네임" maxlength="24" required>
+        <input name="pin" id="upload-pin" placeholder="삭제용 4자리 비밀번호" maxlength="4" inputmode="numeric" pattern="\d{4}" required>
+        <input name="title" id="upload-title" placeholder="제목" maxlength="80" required>
+        <input name="category" id="upload-category" placeholder="카테고리" maxlength="30" list="category-list" required>
+        <datalist id="category-list"></datalist>
+        <textarea name="description" id="upload-description" placeholder="설명" maxlength="240"></textarea>
+        <div class="progress"><div id="progress-bar"></div></div>
+        <p id="upload-status" class="upload-status"></p>
+        <button class="btn btn--primary" type="submit">업로드 실행</button>
+      </form>
+    </div>
+  </div>
+
+  <template id="card-template">
+    <article class="card">
+      <div class="card__image-wrap">
+        <img alt="" loading="lazy">
+        <div class="card__overlay">
+          <button class="overlay-btn overlay-view" type="button">🔍 확대 보기</button>
+          <button class="overlay-btn overlay-delete" type="button">🗑 삭제</button>
+        </div>
+      </div>
+      <div class="card__content">
+        <div class="card__top-row">
+          <span class="badge"></span>
+          <span class="new-badge" hidden>NEW</span>
+        </div>
+        <h2></h2>
+        <p></p>
+        <small class="author"></small>
+      </div>
+    </article>
+  </template>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>
