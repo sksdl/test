@@ -1,11 +1,163 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>My Gallery</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>사진 갤러리</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card-bg: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --shadow: 0 10px 25px rgba(31, 41, 55, 0.12);
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Pretendard", "Noto Sans KR", sans-serif;
+      background: linear-gradient(180deg, #eef2ff 0%, var(--bg) 40%);
+      color: var(--text);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 20px 72px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: clamp(1.8rem, 2.8vw, 2.7rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .header p {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 30px rgba(31, 41, 55, 0.18);
+    }
+
+    .card img {
+      display: block;
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 14px 14px 16px;
+    }
+
+    .card-content h2 {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .card-content span {
+      display: inline-block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding-top: 34px;
+      }
+
+      .card img {
+        height: 160px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>My Gallery</h1>
-  <p>첫 웹페이지입니다.</p>
+  <main class="container">
+    <header class="header">
+      <h1>감성 사진 갤러리</h1>
+      <p>좋아하는 사진들을 카드 형태로 깔끔하게 모아봤어요.</p>
+    </header>
+
+    <section class="gallery-grid" aria-label="사진 갤러리">
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="노을이 비치는 바다 풍경">
+        <div class="card-content">
+          <h2>Sunset Beach</h2>
+          <span>바다 · 노을</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80" alt="햇빛이 드는 숲길">
+        <div class="card-content">
+          <h2>Forest Walk</h2>
+          <span>자연 · 산책</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=800&q=80" alt="산 위에 걸린 구름 풍경">
+        <div class="card-content">
+          <h2>Cloudy Mountain</h2>
+          <span>산 · 구름</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1493244040629-496f6d136cc3?auto=format&fit=crop&w=800&q=80" alt="호수와 보트가 있는 풍경">
+        <div class="card-content">
+          <h2>Calm Lake</h2>
+          <span>호수 · 휴식</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?auto=format&fit=crop&w=800&q=80" alt="도시 야경 풍경">
+        <div class="card-content">
+          <h2>Night City</h2>
+          <span>도시 · 야경</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="광활한 초원과 산맥 풍경">
+        <div class="card-content">
+          <h2>Open Meadow</h2>
+          <span>초원 · 여행</span>
+        </div>
+      </article>
+    </section>
+  </main>
 </body>
 </html>
